@@ -251,11 +251,11 @@ let Engine = Matter.Engine,
 	            var vertices = part.vertices.map(p => {
 	            	return {x: p.x+viewport.offset.x, y: p.y+viewport.offset.y};
 	            });
-	            ctx.moveTo(vertices[0].x/SCALE, vertices[0].y/SCALE);
+	            ctx.moveTo(Math.floor(vertices[0].x/SCALE), Math.floor(vertices[0].y/SCALE));
 	            for (var j = 1; j < vertices.length; j += 1) {
-	                ctx.lineTo(vertices[j].x/SCALE, vertices[j].y/SCALE);
+	                ctx.lineTo(Math.floor(vertices[j].x/SCALE), Math.floor(vertices[j].y/SCALE));
 	            }
-	            ctx.lineTo(vertices[0].x/SCALE, vertices[0].y/SCALE);
+	            ctx.lineTo(Math.floor(vertices[0].x/SCALE), Math.floor(vertices[0].y/SCALE));
 	            ctx.closePath();
 
 	            if (part.render.lineWidth) {
