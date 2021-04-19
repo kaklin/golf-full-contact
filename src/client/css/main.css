@@ -1,0 +1,33 @@
+body {
+  position: fixed;
+  margin: 0;
+  width: 100%;
+  font-family: cursive;
+
+}
+
+html {
+	height: 100%;
+	background-color: #e8fdff;
+}
+
+#header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 1em;
+	margin-left: 2em;
+}
+
+#output {
+	position: absolute;
+	text-align: right;
+	top: 0;
+	right: 0;
+	margin: 1em;
+}
+
+#canvas-container {
+	width: 100vw;
+	height: 100vh;
+}
