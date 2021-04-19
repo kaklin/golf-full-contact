@@ -218,12 +218,15 @@ let Engine = Matter.Engine,
 		//     Body.applyForce(player,player.position,{x:force,y:0});
 		// }
 
-		viewport.offset.x = -ball.position.x+1000
+		viewport.offset.x = Math.floor(-ball.position.x+1000)
 
 		// console.log(Level.getBounds().maxx, Math.floor(ball.position.x))
 		if(ball.position.x > Level.getBounds().maxx - viewport.w*4) {
-			let seg = Level.add_segment();
-			World.add(game.engine.world, [seg.comp])
+			Level.add_segments(9);
+			Level.add_segment('hole');
+			let allComps = Level.getSegmentBodies();
+			let newComps = allComps.slice(allComps.length-10)
+			World.add(game.engine.world, [...newComps])
 		}
 
 	    var bodies = Composite.allBodies(game.engine.world);
