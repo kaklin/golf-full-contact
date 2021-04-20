@@ -1,6 +1,9 @@
 import Golf from './Golf'
 const {magnitude, normalize, scale, capForce, distance, Vec}  = require('./utils')
 
+import { connect } from './networking';
+
+
 import css from './css/main.css'
 
 const canvasContainer = document.getElementById('canvas-container')
@@ -18,6 +21,9 @@ var playerOnFloor = false;
  
 var keys = [];
 
+Promise.all([
+ connect()]);
+
 document.body.addEventListener("keyup", function(e) {
   keys[e.keyCode] = false;
 });
@@ -31,46 +37,36 @@ document.body.addEventListener("keydown", function(e) {
       game.testing = true;
     }
   }
-
-  if (keys[KEY_A]) {
-    Golf.view_offset({x:-10, y:0});
-  } 
-
-  if (keys[KEY_D]) {
-    Golf.view_offset({x:10, y:0});
-  } 
-
 });
 
 
 function expandCanvas() {
-    canvas.width = canvasContainer.clientWidth;
-    canvas.height = canvasContainer.clientHeight;
+  canvas.width = canvasContainer.clientWidth;
+  canvas.height = canvasContainer.clientHeight;
 }
 
 window.addEventListener('resize', expandCanvas, false);
 
 window.onload = () => {
-	//Variables
-	var mousex = 0;
-	var mousey = 0;
-	var mousedown = false;
+  //Variables
+  var mousex = 0;
+  var mousey = 0;
+  var mousedown = false;
 
-	var last_mousey = 0;
-	var last_mousex = 0;
+  var last_mousey = 0;
+  var last_mousex = 0;
     // document.getElementById('output').innerHTML = 'x: '+mousex+', y:'+mousey;
 
-	//Mousemove
-	canvas.addEventListener('mousemove', function(e) {
-	    mousex = parseInt(e.offsetX);
-  		mousey = parseInt(e.offsetY);
-	    //Output
-	    // document.getElementById('output').innerHTML = 'x: '+mousex+', y:'+mousey;
-	});
+  //Mousemove
+  canvas.addEventListener('mousemove', function(e) {
+      mousex = parseInt(e.offsetX);
+      mousey = parseInt(e.offsetY);
+      //Output
+      // document.getElementById('output').innerHTML = 'x: '+mousex+', y:'+mousey;
+  });
 
-    expandCanvas();
+  expandCanvas();
 
-    let game = Golf.create(canvas, ctx);
-    Golf.run(game);
-
+  let game = Golf.create(canvas, ctx);
+  Golf.run(game);
 }
